@@ -1,25 +1,51 @@
 package ru.netology;
 
 public class Radio {
-    int currentNumber;
+    int defaultNumber = 10;
     int minStationNumber = 0;
     int maxStationNumber = 9;
+    int currentNumber;
     int currentVolume;
     int minVolume = 0;
     int maxVolume = 100;
 
+    public Radio() {
+    }
+
+    public Radio(int defaultNumber) {
+        this.defaultNumber = defaultNumber;
+        this.maxStationNumber = defaultNumber - 1;
+    }
+
     public int getCurrentNumber() {
         return currentNumber;
+    }
+
+    public int getDefaultNumber() {
+        return defaultNumber;
     }
 
     public void setCurrentNumber(int newCurrentNumber) {
         if (newCurrentNumber < 0) {
             return;
         }
-        if (newCurrentNumber > 9) {
+        if (newCurrentNumber >= defaultNumber) {
             return;
         }
         this.currentNumber = newCurrentNumber;
+    }
+
+    public void setDefaultNumber(int newDefaultNumber) {
+        if (newDefaultNumber < minStationNumber) {
+            return;
+        }
+        if (newDefaultNumber > defaultNumber) {
+            return;
+        }
+        if (newDefaultNumber != defaultNumber) {
+            return;
+        }
+        this.defaultNumber = newDefaultNumber;
     }
 
     public void nextIncreaseNumber() {
@@ -34,7 +60,7 @@ public class Radio {
         if (currentNumber > minStationNumber) {
             currentNumber = currentNumber - 1;
         } else {
-            currentNumber = 9;
+            currentNumber = maxStationNumber;
         }
     }
 
